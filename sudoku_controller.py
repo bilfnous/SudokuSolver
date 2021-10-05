@@ -12,8 +12,11 @@ import sudoku_view as view
 
 
 def main():
+    possible = []
     view.print_grid(model.grid_m)
     model.read_grid(model.grid_m)
     view.print_grid(model.grid_m)
-            
+    possible = model.solve_row(model.grid_m, 0)
+    print (possible)
+
 if __name__ == '__main__': main()

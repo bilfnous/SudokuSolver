@@ -22,4 +22,4 @@ def print_grid(grid):
             else:
                 print(str(grid[i][j]) + "  ", end="")
     
-    print("- - - - - - - - - - - - - - - - -\n")
+    print("- - - - - - - - - - - - - - - - -\n\n")
