@@ -14,37 +14,39 @@ grid_m = [[0 for i in range(ROW_COL_LEN)] for i in range(ROW_COL_LEN)]
 
 def read_grid(grid):
     print("Fill in the sudoku grid; enter 0 to fill the empty cell: ")
-    for i in range(ROW_COL_LEN):
+    for i in range(1):
         for j in range(ROW_COL_LEN):
             grid[i][j] = input(f'[{i + 1}] [{j + 1}] >> ')
 
 
-# return possible numbers for each index
-
+# return possible numbers for each index in a row
 def solve_row(grid, row):
     possible = NUMBERS
 
     for i in range(ROW_COL_LEN):
         if grid[row][i] != 0:
-            var = grid[row][i]
+            var = int(grid[row][i])
             for j in range(ROW_COL_LEN):
                 if var == NUMBERS[j]:
-                    possible.remove(j)
+                    possible[j] = 0
     return possible
 
-
+# return possible numbers for each index in a colmun
 def sovle_colmun():
 
     return 0
 
+# return possible numbers for each index in a square
 def solve_square():
 
     return 0
 
+# return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
 def neighbour_row():
 
     return 0
 
+# return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
 def neighbour_colmun():
 
     return 0
