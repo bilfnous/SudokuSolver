@@ -16,7 +16,7 @@ def read_grid(grid):
     print("Fill in the sudoku grid; enter 0 to fill the empty cell: ")
     for i in range(ROW_COL_LEN):
         for j in range(ROW_COL_LEN):
-            grid[i][j] = input(f'[{i + 1}] [{j + 1}] >> ')
+            grid[i][j] = input(f'[{i + 1}] [{j + 1}] >> ') or 0
 
 
 # return possible numbers for each index in a row
@@ -25,9 +25,8 @@ def solve_row(grid, row, possible):
         if grid[row][i] != 0:
             var = int(grid[row][i])
             # replace existing numbers with 0
-            for j in range(ROW_COL_LEN):
-                if var == NUMBERS[j]:
-                    possible[j] = 0
+            if var in NUMBERS:
+                possible.remove(var)
     return possible
 
 # return possible numbers for each index in a colmun
@@ -35,22 +34,26 @@ def sovle_colmun(grid, col, possible):
     for i in range(ROW_COL_LEN):
         if grid[i][col] != 0:
             var = int(grid[i][col])
-        for j in range(ROW_COL_LEN):
-                if var == NUMBERS[j]:
-                    possible[j] = 0
+            if var in NUMBERS:
+                possible.remove(var)
     return possible
 
 # return possible numbers for each index in a square
-def solve_square():
-
-    return 0
+def solve_square(grid, row, col, possible):
+    for i in range(3):
+        for j in range(3):
+               if grid[row + i][col + j] != 0:
+                   var = int(grid[row + i][col + j])
+                   if var in NUMBERS:
+                       possible.remove(var)    
+    return possible
 
 # return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
-def neighbour_row():
+def neighbour_row(possible):
 
-    return 0
+    return possible
 
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
-def neighbour_colmun():
+def neighbour_colmun(possible):
 
-    return 0
+    return possible
