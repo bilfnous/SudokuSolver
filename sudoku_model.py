@@ -52,20 +52,30 @@ def solve_square(grid, row, col, possible):
 # return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
 def neighbour_row(grid, row, possible):
     if row == 0:
-        possible = solve_row(grid_m, 1, possible)
-        possible = solve_row(grid_m, 2, possible)
+        possible = solve_row(grid, 1, possible)
+        possible = solve_row(grid, 2, possible)
         return possible
 
     if row == 8:
-        possible = solve_row(grid_m, 1, possible)
-        possible = solve_row(grid_m, 2, possible)
+        possible = solve_row(grid, 6, possible)
+        possible = solve_row(grid, 7, possible)
         return possible  
     
-    possible = solve_row(grid_m, row - 1, possible)
-    possible = solve_row(grid_m, row + 1, possible)
+    possible = solve_row(grid, row - 1, possible)
+    possible = solve_row(grid, row + 1, possible)
     return possible
 
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
 def neighbour_colmun(grid, col, possible):
+    if col == 0:
+        possible = sovle_colmun(grid, 1, possible)
+        possible = sovle_colmun(grid, 2, possible)
+        return possible
+    if col == 8:
+        possible = sovle_colmun(grid, 6, possible)
+        possible = sovle_colmun(grid, 7, possible)
+        return possible
 
+    possible = sovle_colmun(grid, col - 1, possible)
+    possible = sovle_colmun(grid, col + 1, possible)  
     return possible
