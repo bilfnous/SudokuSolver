@@ -7,6 +7,7 @@ __email__ = "b.alfanous@outlook.com"
 __date__ = "28/Mar/2020"
 
 ROW_COL_LEN = 9
+SQUARE_LEN = 3
 NUMBERS = [1, 2, 3, 4, 5, 6 ,7 ,8 ,9]
 
 # Creates 2D array that contains 9 lists, each of 9 items, all set to 0 
@@ -40,8 +41,8 @@ def sovle_colmun(grid, col, possible):
 
 # return possible numbers for each index in a square
 def solve_square(grid, row, col, possible):
-    for i in range(3):
-        for j in range(3):
+    for i in range(SQUARE_LEN):
+        for j in range(SQUARE_LEN):
                if grid[row + i][col + j] != 0:
                    var = int(grid[row + i][col + j])
                    if var in NUMBERS:
@@ -49,11 +50,22 @@ def solve_square(grid, row, col, possible):
     return possible
 
 # return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
-def neighbour_row(possible):
+def neighbour_row(grid, row, possible):
+    if row == 0:
+        possible = solve_row(grid_m, 1, possible)
+        possible = solve_row(grid_m, 2, possible)
+        return possible
 
+    if row == 8:
+        possible = solve_row(grid_m, 1, possible)
+        possible = solve_row(grid_m, 2, possible)
+        return possible  
+    
+    possible = solve_row(grid_m, row - 1, possible)
+    possible = solve_row(grid_m, row + 1, possible)
     return possible
 
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
-def neighbour_colmun(possible):
+def neighbour_colmun(grid, col, possible):
 
     return possible
