@@ -51,18 +51,29 @@ def solve_square(grid, row, col, possible):
 
 # return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
 def neighbour_row(grid, row, possible):
+    exsit = 0
     if row == 0:
-        possible = solve_row(grid, 1, possible)
-        possible = solve_row(grid, 2, possible)
-        return possible
+        row1 = 1
+        row2 = 2
+    elif row == 8:
+        row1 = 6
+        row2 = 7
+    else:
+        row1 = row - 1
+        row2 = row + 1
 
-    if row == 8:
-        possible = solve_row(grid, 6, possible)
-        possible = solve_row(grid, 7, possible)
-        return possible  
-    
-    possible = solve_row(grid, row - 1, possible)
-    possible = solve_row(grid, row + 1, possible)
+    for x in range(len(possible)):
+        var = possible[x]
+        exsit = 0
+        for i in range(ROW_COL_LEN):
+            if grid[row1][i] == var:
+                exsit += 1
+        for j in range(ROW_COL_LEN):
+            if grid[row2][j] == var:
+                exsit += 1
+        if exsit == 2:
+            possible.remove(var)
+       
     return possible
 
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
