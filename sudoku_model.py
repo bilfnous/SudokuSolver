@@ -73,20 +73,30 @@ def neighbour_row(grid, row, possible):
                 exsit += 1
         if exsit == 2:
             possible.remove(var)
-       
     return possible
 
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
 def neighbour_colmun(grid, col, possible):
+    exsit = 0
     if col == 0:
-        possible = sovle_colmun(grid, 1, possible)
-        possible = sovle_colmun(grid, 2, possible)
-        return possible
-    if col == 8:
-        possible = sovle_colmun(grid, 6, possible)
-        possible = sovle_colmun(grid, 7, possible)
-        return possible
+        col1 = 1
+        col2 = 2
+    elif col == 8:
+        col1 = 6
+        col2 = 7
+    else:
+        col1 = col - 1
+        col2 = col + 1
 
-    possible = sovle_colmun(grid, col - 1, possible)
-    possible = sovle_colmun(grid, col + 1, possible)  
+    for x in range(len(possible)):
+        var = possible[x]
+        exsit = 0
+        for i in range(ROW_COL_LEN):
+            if grid[i][col1] == var:
+                exsit += 1
+        for j in range(ROW_COL_LEN):
+            if grid[j][col2] == var:
+                exsit += 1
+        if exsit == 2:
+            possible.remove(var) 
     return possible
