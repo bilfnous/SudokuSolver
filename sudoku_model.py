@@ -71,7 +71,7 @@ def neighbour_row(grid, row, possible):
         for j in range(ROW_COL_LEN):
             if grid[row2][j] == var:
                 exsit += 1
-        if exsit == 2:
+        if exsit == 1:
             possible.remove(var)
     return possible
 
@@ -97,6 +97,14 @@ def neighbour_colmun(grid, col, possible):
         for j in range(ROW_COL_LEN):
             if grid[j][col2] == var:
                 exsit += 1
-        if exsit == 2:
+        if exsit == 1:
             possible.remove(var) 
     return possible
+
+# if there are no 0's in the grid, the function returns True, otherwise it returns False
+def solved(grid):
+    for i in range(ROW_COL_LEN):
+        for j in range(ROW_COL_LEN):
+            grid[i][j] == 0
+            return False     
+    return True
