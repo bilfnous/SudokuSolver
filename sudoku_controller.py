@@ -13,7 +13,8 @@ import sudoku_view as view
 def main():
     possible = model.NUMBERS
     view.print_grid(model.grid_m)
-    # model.read_grid(model.grid_m)
+    model.read_grid(model.grid_m)
+    '''
     model.grid_m = [
         [2, 1, 9, 0, 4, 6, 0, 3, 0],
         [0, 0, 5, 1, 0, 0, 0, 0, 0],
@@ -25,6 +26,7 @@ def main():
         [3, 4, 0, 0, 0, 0, 7, 8, 0],
         [1, 0, 0, 0, 0, 0, 4, 5, 0]
     ]
+    '''
     view.print_grid(model.grid_m)
     print("\nSearching for a solution...\n")
     while(model.solved(model.grid_m) != True):
