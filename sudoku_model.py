@@ -26,7 +26,7 @@ def solve_row(grid, row, possible):
         if grid[row][i] != 0:
             var = int(grid[row][i])
             # replace existing numbers with 0
-            if var in NUMBERS:
+            if var in possible:
                 possible.remove(var)
     return possible
 
@@ -35,19 +35,21 @@ def sovle_colmun(grid, col, possible):
     for i in range(ROW_COL_LEN):
         if grid[i][col] != 0:
             var = int(grid[i][col])
-            if var in NUMBERS:
+            if var in possible:
                 possible.remove(var)
     return possible
 
 # return possible numbers for each index in a square
 def solve_square(grid, row, col, possible):
-    for i in range(SQUARE_LEN):
-        for j in range(SQUARE_LEN):
-               if grid[row + i][col + j] != 0:
-                   var = int(grid[row + i][col + j])
-                   if var in NUMBERS:
-                       possible.remove(var)    
-    return possible
+   row = (row // 3) * 3
+   col = (col // 3) * 3
+   for i in range(SQUARE_LEN):
+       for j in range(SQUARE_LEN):
+           if grid[row + i][col + j] != 0:
+               var = int(grid[row + i][col + j])
+               if var in possible:
+                   possible.remove(var)
+   return possible
 
 # return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
 def neighbour_row(grid, row, possible):
@@ -71,10 +73,11 @@ def neighbour_row(grid, row, possible):
         for j in range(ROW_COL_LEN):
             if grid[row2][j] == var:
                 exsit += 1
-        if exsit == 1:
-            possible.remove(var)
+        if exsit == 2:
+            possible[0] = var
+            return possible
     return possible
-
+    
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
 def neighbour_colmun(grid, col, possible):
     exsit = 0
@@ -97,14 +100,14 @@ def neighbour_colmun(grid, col, possible):
         for j in range(ROW_COL_LEN):
             if grid[j][col2] == var:
                 exsit += 1
-        if exsit == 1:
-            possible.remove(var) 
+        if exsit == 2:
+            possible[0] = var
     return possible
 
 # if there are no 0's in the grid, the function returns True, otherwise it returns False
 def solved(grid):
     for i in range(ROW_COL_LEN):
         for j in range(ROW_COL_LEN):
-            grid[i][j] == 0
-            return False     
+            if grid[i][j] == 0:
+                return False     
     return True
