@@ -54,15 +54,16 @@ def solve_square(grid, row, col, possible):
 # return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
 def neighbour_row(grid, row, possible):
     exsit = 0
-    if row == 0:
-        row1 = 1
-        row2 = 2
-    elif row == 8:
-        row1 = 6
-        row2 = 7
-    else:
+    rtn = [0]
+    if row == 0 or row == 3 or row == 6:
+        row1 = row + 1
+        row2 = row + 2
+    elif row == 1 or row == 4 or row == 7:
         row1 = row - 1
         row2 = row + 1
+    elif row == 2 or row == 5 or row == 8:
+        row1 = row - 1
+        row2 = row - 2
 
     for x in range(len(possible)):
         var = possible[x]
@@ -74,22 +75,23 @@ def neighbour_row(grid, row, possible):
             if grid[row2][j] == var:
                 exsit += 1
         if exsit == 2:
-            possible[0] = var
-            return possible
+            rtn[0] = var
+            return rtn
     return possible
     
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
 def neighbour_colmun(grid, col, possible):
     exsit = 0
-    if col == 0:
-        col1 = 1
-        col2 = 2
-    elif col == 8:
-        col1 = 6
-        col2 = 7
-    else:
+    rtn = [0]
+    if col == 0 or col == 3 or col == 6:
+        col1 = col + 1
+        col2 = col + 2
+    elif col == 1 or col == 4 or col == 7:
         col1 = col - 1
         col2 = col + 1
+    elif col == 2 or col == 5 or col == 8:
+        col1 = col - 1
+        col2 = col - 2
 
     for x in range(len(possible)):
         var = possible[x]
@@ -101,7 +103,8 @@ def neighbour_colmun(grid, col, possible):
             if grid[j][col2] == var:
                 exsit += 1
         if exsit == 2:
-            possible[0] = var
+            rtn[0] = var
+            return rtn
     return possible
 
 # if there are no 0's in the grid, the function returns True, otherwise it returns False
