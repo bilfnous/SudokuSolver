@@ -53,8 +53,9 @@ def solve_square(grid, row, col, possible):
 
 # return possible numbers for each index in a neighbouring rows (the row before and after the index in quary)
 def neighbour_row(grid, row, possible):
-    exsit = 0
-    rtn = [0]
+    exist = 0
+    rtn = [0 for i in range(ROW_COL_LEN)]
+    rtn_i = 0
     if row == 0 or row == 3 or row == 6:
         row1 = row + 1
         row2 = row + 2
@@ -67,22 +68,29 @@ def neighbour_row(grid, row, possible):
 
     for x in range(len(possible)):
         var = possible[x]
-        exsit = 0
+        exist = 0
         for i in range(ROW_COL_LEN):
             if grid[row1][i] == var:
-                exsit += 1
+                exist += 1
         for j in range(ROW_COL_LEN):
             if grid[row2][j] == var:
-                exsit += 1
-        if exsit == 2:
-            rtn[0] = var
-            return rtn
+                exist += 1
+        if exist == 2:
+            rtn[rtn_i] = var
+            rtn_i += 1
+            exist = 0
+    if rtn[0] != 0:
+        var = 0
+        for var in rtn:
+            rtn.remove(var)
+        return rtn
     return possible
     
 # return possible numbers for each index in a neighbouring colmuns (the columns above and below the index in quary)
 def neighbour_colmun(grid, col, possible):
-    exsit = 0
-    rtn = [0]
+    exist = 0
+    rtn = [0 for i in range(ROW_COL_LEN)]
+    rtn_i = 0
     if col == 0 or col == 3 or col == 6:
         col1 = col + 1
         col2 = col + 2
@@ -95,16 +103,21 @@ def neighbour_colmun(grid, col, possible):
 
     for x in range(len(possible)):
         var = possible[x]
-        exsit = 0
+        exist = 0
         for i in range(ROW_COL_LEN):
             if grid[i][col1] == var:
-                exsit += 1
+                exist += 1
         for j in range(ROW_COL_LEN):
             if grid[j][col2] == var:
-                exsit += 1
-        if exsit == 2:
-            rtn[0] = var
-            return rtn
+                exist += 1
+        if exist == 2:
+            rtn[rtn_i] = var
+            rtn_i += 1
+    if rtn[0] != 0:
+        var = 0
+        for var in rtn:
+            rtn.remove(var)
+        return rtn
     return possible
 
 # if there are no 0's in the grid, the function returns True, otherwise it returns False

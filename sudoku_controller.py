@@ -15,7 +15,7 @@ def main():
     view.print_grid(model.grid_m)
    # model.read_grid(model.grid_m)
     
-    '''
+    #'''
     model.grid_m = [
         [2, 1, 9, 0, 4, 6, 0, 3, 0],
         [0, 0, 5, 1, 0, 0, 0, 0, 0],
@@ -27,23 +27,16 @@ def main():
         [3, 4, 0, 0, 0, 0, 7, 8, 0],
         [1, 0, 0, 0, 0, 0, 4, 5, 0]
     ]
-    '''
-
-    model.grid_m = [
-        [0, 0, 0, 0, 8, 2, 0, 0, 0],
-        [0, 8, 0, 0, 0, 6, 4, 0, 0],
-        [9, 6, 0, 4, 0, 1, 0, 0, 0],
-        [0, 0, 0, 5, 0, 0, 0, 1, 0],
-        [0, 4, 0, 0, 0, 3, 2, 0, 0],
-        [5, 3, 0, 6, 2, 0, 0, 0, 0],
-        [0, 0, 6, 0, 0, 0, 0, 0, 2],
-        [2, 0, 0, 0, 0, 0, 7, 4, 5],
-        [0, 5, 0, 0, 4, 0, 0, 9, 6]
-    ]
+    #'''
     
     view.print_grid(model.grid_m)
     print("\nSearching for a solution...\n")
+    counter = 0
     while(model.solved(model.grid_m) != True):
+        counter += 1
+        if counter == 100:
+            break
+        print(counter)
         for i in range(model.ROW_COL_LEN):
             for j in range(model.ROW_COL_LEN):
                 possible = 0
@@ -57,12 +50,9 @@ def main():
                     model.grid_m[i][j] = int(possible[0])
                     continue
                 possible = model.neighbour_row(model.grid_m, i, possible)
-                if len(possible) == 1:
-                    model.grid_m[i][j] = int(possible[0])
-                    continue
                 possible = model.neighbour_colmun(model.grid_m, j, possible)
                 if len(possible) == 1:
                     model.grid_m[i][j] = int(possible[0])
-        view.print_grid(model.grid_m)
+    view.print_grid(model.grid_m) 
 
 if __name__ == '__main__': main()
